@@ -43,7 +43,8 @@ class FeatureImageDetector:
         bkp_frame = cv2.imread('chinchq.jpg')
         # Keypoint (kp) detection and calculate descriptors (des)
         kp, des = imagedata.feature_detector.detectAndCompute(frame, None)
-        cv2.imshow(" Actual Img", frame)
+        winframe=imutils.resize(frame,1000,1000)
+        cv2.imshow(" Actual Img", winframe)        
         cv2.waitKey(0)
         cv2.imshow(" Feature Image", imagedata.querying)
         cv2.waitKey(0)
@@ -77,7 +78,7 @@ class FeatureImageDetector:
         # Visualize the matches
         draw_params = dict(matchColor=(0, 255, 0), singlePointColor=(0, 0, 255), flags=0)
         img = cv2.drawMatchesKnn(imagedata.querying, imagedata.kp0, frame, kp, goodfeatures, None, **draw_params)
-
+        img=imutils.resize(img, 1000,1000)
         cv2.imshow("feature match : ",img)
         cv2.waitKey()
         cv2.imshow("Amount portion : ",cropped_img)
